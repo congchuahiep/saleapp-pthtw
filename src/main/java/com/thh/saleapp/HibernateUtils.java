@@ -5,7 +5,13 @@
 package com.thh.saleapp;
 
 import com.thh.pojo.Category;
+import com.thh.pojo.Comment;
+import com.thh.pojo.OrderDetail;
+import com.thh.pojo.ProdTag;
 import com.thh.pojo.Product;
+import com.thh.pojo.SaleOrder;
+import com.thh.pojo.Tag;
+import com.thh.pojo.User;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -35,6 +41,12 @@ public class HibernateUtils {
         
         conf.addAnnotatedClass(Category.class);
         conf.addAnnotatedClass(Product.class);
+        conf.addAnnotatedClass(Comment.class);
+        conf.addAnnotatedClass(OrderDetail.class);
+        conf.addAnnotatedClass(ProdTag.class);
+        conf.addAnnotatedClass(SaleOrder.class);
+        conf.addAnnotatedClass(Tag.class);
+        conf.addAnnotatedClass(User.class);
         
         ServiceRegistry serviceRegistry =
                 new StandardServiceRegistryBuilder()

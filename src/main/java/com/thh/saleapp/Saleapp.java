@@ -20,7 +20,7 @@ public class Saleapp {
 
         ProductRepositoryImpl s1 = new ProductRepositoryImpl();
         s1.getProducts(null)
-                .forEach(p -> System.out.printf("%d - %s: %.1f\n",
+                .forEach(p -> System.out.printf("%d - %s: %d\n",
                         p.getId(),
                         p.getName(),
                         p.getPrice()
@@ -31,11 +31,13 @@ public class Saleapp {
         param2.put("name", "Tab");
         ProductRepositoryImpl s2 = new ProductRepositoryImpl();
         s2.getProducts(param2)
-                .forEach(p -> System.out.printf("%d - %s: %.1f\n",
+                .forEach(p -> System.out.printf("%d - %s: %d\n",
                         p.getId(),
                         p.getName(),
                         p.getPrice()
                 )
         );
+        
+        
     }
 }
