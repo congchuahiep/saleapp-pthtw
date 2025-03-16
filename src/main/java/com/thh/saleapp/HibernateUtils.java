@@ -5,6 +5,7 @@
 package com.thh.saleapp;
 
 import com.thh.pojo.Category;
+import com.thh.pojo.Product;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -33,6 +34,7 @@ public class HibernateUtils {
         conf.setProperties(props);
         
         conf.addAnnotatedClass(Category.class);
+        conf.addAnnotatedClass(Product.class);
         
         ServiceRegistry serviceRegistry =
                 new StandardServiceRegistryBuilder()

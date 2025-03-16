@@ -4,6 +4,8 @@
 
 package com.thh.saleapp;
 
+import com.thh.repositories.impl.CategoryRepositoryImpl;
+
 /**
  *
  * @author admin
@@ -11,6 +13,7 @@ package com.thh.saleapp;
 public class Saleapp {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        CategoryRepositoryImpl s = new CategoryRepositoryImpl();
+        s.getCates().forEach(c -> System.out.println(c.getName()));
     }
 }
