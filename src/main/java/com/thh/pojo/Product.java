@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
 
@@ -30,8 +31,24 @@ public class Product {
     private String manufacturer;
     @Column(name = "created_date")
     private Date createdDate;
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public Product() {
+    }
+
+    public Product(int id, String name, String description, double price, String manufacturer, Date createdDate, Category category) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.manufacturer = manufacturer;
+        this.createdDate = createdDate;
+        this.category = category;
+    }
+    
+    
 
     /**
      * @return the id
