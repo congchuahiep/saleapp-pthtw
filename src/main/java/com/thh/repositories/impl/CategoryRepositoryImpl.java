@@ -6,9 +6,10 @@ package com.thh.repositories.impl;
 
 import com.thh.pojo.Category;
 import com.thh.saleapp.HibernateUtils;
-import jakarta.persistence.Query;
-import java.util.List;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
+
+import java.util.List;
 
 /**
  *
@@ -17,7 +18,7 @@ import org.hibernate.Session;
 public class CategoryRepositoryImpl {
     public List<Category> getCates() {
         try (Session s = HibernateUtils.getFACTORY().openSession()) {
-            Query q = s.createQuery("FROM Category", Category.class);
+            Query<Category> q = s.createQuery("FROM Category", Category.class);
             
             return q.getResultList();
         }

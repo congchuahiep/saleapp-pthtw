@@ -6,29 +6,28 @@ package com.thh.repositories.impl;
 
 import com.thh.pojo.Product;
 import com.thh.saleapp.HibernateUtils;
-import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.hibernate.Session;
 
 /**
- *
  * @author admin
  */
 public class ProductRepositoryImpl {
-    
     private static final int PAGE_SIZE = 6;
 
     public List<Product> getProducts(Map<String, String> params) {
         try (Session s = HibernateUtils.getFACTORY().openSession()) {
             CriteriaBuilder b = s.getCriteriaBuilder();
             CriteriaQuery<Product> q = b.createQuery(Product.class);
-            Root root = q.from(Product.class);
+            Root<Product> root = q.from(Product.class);
 
             q.select(root);
 
@@ -50,17 +49,17 @@ public class ProductRepositoryImpl {
                 if (toPrice != null && !toPrice.isEmpty()) {
                     predicates.add(b.like(root.get("name"), String.format("%%%s%%", toPrice)));
                 }
-                
+
                 q.where(predicates.toArray(Predicate[]::new));
-                
-                String sort =  params.get("sort");
+
+                String sort = params.get("sort");
                 if (sort != null && !sort.isEmpty()) {
                     q.orderBy(b.asc(root.get(sort)));
                 }
             }
 
-            Query query = s.createQuery(q);
-            
+            Query<Product> query = s.createQuery(q);
+
             if (params != null) {
                 int page = Integer.parseInt(params.getOrDefault("page", "1"));
                 int start = (page - 1) * PAGE_SIZE;

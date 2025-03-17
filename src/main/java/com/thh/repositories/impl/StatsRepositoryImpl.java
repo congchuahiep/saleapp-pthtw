@@ -7,14 +7,11 @@ package com.thh.repositories.impl;
 import com.thh.pojo.OrderDetail;
 import com.thh.pojo.Product;
 import com.thh.saleapp.HibernateUtils;
-import jakarta.persistence.Query;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Root;
-import java.util.List;
+import jakarta.persistence.criteria.*;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 /**
  *
@@ -25,7 +22,7 @@ public class StatsRepositoryImpl {
         try (Session s = HibernateUtils.getFACTORY().openSession()) {
             CriteriaBuilder b = s.getCriteriaBuilder();
             CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
-            Root root = q.from(OrderDetail.class);
+            Root<OrderDetail> root = q.from(OrderDetail.class);
             Join<OrderDetail, Product> join = root.join("productId", JoinType.RIGHT);
             
             q.multiselect(
@@ -36,7 +33,7 @@ public class StatsRepositoryImpl {
             
             q.groupBy(join.get("id"));
             
-            Query query = s.createQuery(q);
+            Query<Object[]> query = s.createQuery(q);
             return query.getResultList();
         }
     }
